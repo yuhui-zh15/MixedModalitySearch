@@ -1,0 +1,12 @@
+python embedddings.py \
+  --dataset_name mixed-modality-search/MixBench25   \
+  --subset_name MSCOCO   \
+  --image_root  ../MixBench_img   \
+  --query_save_path   /path/to/vlm2vec_query_emebdding.pt  \
+  --corpus_save_path   /path/to/vlm2vec_corpus_emebdding.pt  \
+  --save_path   /path/to/vlm2vec_emebdding.pt  \
+  --model_name  Qwen/Qwen2-VL-7B-Instruct  \
+  --checkpoint_path TIGER-Lab/VLM2Vec-Qwen2VL-7B    \
+  --device cuda                            \
+  --normalize                              \
+  --pooling last
