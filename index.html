@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WLB3DPRW48"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-WLB3DPRW48');
+  </script>
+  <script
+    type="module"
+    src="https://gradio.s3-us-west-2.amazonaws.com/5.9.1/gradio.js"
+  ></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta content="Closing the Modality Gap for Mixed Modality Search" property="og:title">
+  <meta content="Closing the Modality Gap for Mixed Modality Search" property="twitter:title">
+  <meta content="We present an agentic framework to convert open-ended VQA questions into the multiple-choice format and construct a unified multiple-choice benchmark to simplify VLM evaluation." name="description">
+  <meta content="We present an agentic framework to convert open-ended VQA questions into the multiple-choice format and construct a unified multiple-choice benchmark to simplify VLM evaluation." property="og:description">
+  <meta content="We present an agentic framework to convert open-ended VQA questions into the multiple-choice format and construct a unified multiple-choice benchmark to simplify VLM evaluation." property="twitter:description">
+  <meta property="og:type" content="website">
+ 
+  <title>Closing the Modality Gap for Mixed Modality Search</title>
+  <meta name="description" content="We present an agentic framework to convert open-ended VQA questions into the multiple-choice format and construct a unified multiple-choice benchmark to simplify VLM evaluation.">
+  <meta name="keywords" content="vision language models, evaluation, multiple-choice questions">
+  <link rel="icon" type="image/x-icon" href="assets/favicon_io/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon.png">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/custom.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+
+  <style>
+    .image-set {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 3px;
+      margin-bottom: 3px;
+    }
+    .hypotheses {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .square-image {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      overflow: hidden;
+    }
+    #leaderboard-table td, #leaderboard-table th {
+      text-align: center; 
+    }
+    .code-block {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 4px;
+      font-family: monospace;
+      margin-bottom: 10px;
+    }
+  </style>
+
+</head>
+<body>
+
+<section class="hero space-background has-text-white">
+  <div class="hero-body space-background-overlay">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title has-text-black">Closing the Modality Gap for Mixed Modality Search</h1>
+          <!-- <h1 class="title is-4 publication-title has-text-black">C 2025</h1> -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/AndyCA111/" target="_blank">Binxu Li\(^{1\star}\)</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://cs.stanford.edu/~yuhuiz/" target="_blank">Yuhui Zhang\(^{1\star}\)</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://wxh1996.github.io/" target="_blank">Xiaohan Wang\(^{1}\)</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://ai.stanford.edu/~wxliang/" target="_blank">Weixin Liang\(^{1}\)</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://people.csail.mit.edu/ludwigs/" target="_blank">Ludwig Schmidt\(^{1\dagger}\)</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://ai.stanford.edu/~syyeung/" target="_blank">Serena Yeung\(^{1\dagger}\)</a>,
+            </span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block">\(^1\)Stanford University</span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block">\(^\star\)Equal contribution</span>
+            <span class="author-block">\(^\dagger\)Equal advising</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/2501.03225" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/AndyCA111/mixed_modality_retrieval" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/mixed-modality-search/MixBench2025" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    🤗
+                  </span>
+                  <span>Dataset</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- B -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="column has-text-centered">
+          <h2 class="title is-4">Abstract</h2>
+          <!-- <center><img id="method" src="assets/ab_img.png" width="60%"/></center> -->
+          <div class="content has-text-justified">
+            <p>
+              Mixed modality search—retrieving information across a heterogeneous corpus composed of images, texts, and multimodal documents—is an important yet underexplored real-world application. In this work, we investigate how contrastive vision-language models, such as CLIP, perform on the mixed modality search task. Our analysis reveals a critical limitation: these models exhibit a pronounced modality gap in the embedding space, where image and text embeddings form distinct clusters, leading to intra-modal ranking bias and inter-modal fusion failure. To address this issue, we propose GR-CLIP, a lightweight post-hoc calibration method that removes the modality gap in CLIP’s embedding space. Evaluated on MixBench—the first benchmark specifically designed for mixed modality search—GR-CLIP improves NDCG@10 by up to 26 percentage points over CLIP, surpasses recent vision-language generative embedding models by 4 percentage points, while using 75$\times$ less compute.
+            </p>  
+          <br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ B -->
+
+        
+    <!-- <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">📹 Video</h2>
+        <div class="content has-text-centered">
+          <iframe 
+            src="https://www.youtube.com/embed/w_pPUO6YU-g?si=EkuQcjFyU4UBNrVT" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen
+            style="width: 100%; max-width: 1000px; height: auto; aspect-ratio: 16/9;">
+          </iframe>
+        </div>
+      </div>
+    </div>
+    <br><br> -->
+
+    <!-- A -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">💡 Paper Overview</h2>
+        <p>
+        Mixed modality search aims to retrieve semantically relevant content when both the query and the documents may consist of different combinations of modalities, such as 
+        $\textcolor{orange}{\text{text}},\ 
+        \textcolor{magenta}{\text{image}},\ 
+        \textcolor{SkyBlue}{\text{screenshot}},\ 
+        \textcolor{purple}{\text{audio}},\ 
+        \textcolor{gray}{\text{video}}$. 
+    
+        It differs from traditional retrieval in two key ways: first, the corpus contains a heterogeneous mix of modality types across documents; second, some documents combine multiple modalities that must be jointly interpreted. The goal is to rank documents based on semantic meaning, regardless of their modality.
+        </p>         
+        <div class="content has-text-justified">
+            <center><img id="method" src="assets/figure_overview_all.png" width="100%"/></center>
+            <p> Our paper can be summarized into three main points:</p>
+            <ul>
+              <li>
+                (a) We formalize mixed modality retrieval as retrieving from a corpus of pure-text, pure-image, and combined text-image documents, and identify two core challenges: cross-modal alignment——<b>Retrieval with Heterogeneous Corpus</b>, and multimodal fusion——<b>Retrieval with Multimodal Documents</b>.
+              </li>
+              <li> (b-d) We analyze how CLIP‐based models fuse multiple modalities and reveal that the "modality gap" causes embeddings from different modalities to cluster into distinct groups, biasing similarity scores. To address this, we propose GR‐CLIP (GR stands for gap-removed), a lightweight post‐hoc calibration method that subtracts each modality’s mean embedding to center representations, resulting in significant improvement with minimal extra computation.</li>
+              <li> (e) We introduce MixBench, which unifying the two retrieval settings, each containing equal proportions of pure‐text, pure‐image, and multimodal documents, to simulate realistic search scenarios.</li>
+            </ul>
+            <p>We will present results and analysis for the first two retrieval settings, followed by the mixed modality search scenario.</p>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <!--/ A -->
+
+
+
+    <!-- A -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">🛠️ Retrieval with Heterogeneous Corpus</h2>
+        <div class="content has-text-justified">
+          <p>We begin with an ablated setting of mixed modality search: a heterogeneous corpus composed of unimodal documents (e.g., text-only or image-only). This setting evaluates whether a retrieval model can effectively handle the challenge of cross-modal alignment.</p>
+          <center><img id="method" src="assets/figure_two_new.png" width="100%"/></center>
+          <p>
+            <strong>(a) Dataset Construction:</strong> We construct a heterogeneous corpus by randomly replacing text documents with either screenshot renderings of the text or paired images with probability $p$. Since the semantic content remains unchanged, a retrieval system with perfect cross-modal alignment should maintain the same performance regardless of $p$.  
+            <strong>(b) Initial Results $\&$ Simulation:</strong> Surprisingly, CLIP exhibits a U-shaped performance curve as text is replaced with screenshots. We attribute this behavior to the modality gap in CLIP's embedding space. A simulation experiment that artificially penalizes cross-modal documents reproduces the same U-shaped trend, confirming our hypothesis.  
+            <strong>(c) Method — GR-CLIP:</strong> Building on prior work, we propose <strong>GR-CLIP</strong>, a simple post-hoc calibration that removes the modality gap via mean-centering of text and image embeddings.  
+            <strong>(d) Improved Results:</strong>  GR-CLIP flattens the U-shaped curve and significantly improves retrieval accuracy, achieving comparable or better performance than the VLM2Vec baseline with far less compute.  
+            <strong>(e) Generalization Across Models, Datasets, and Modalities:</strong> To evaluate generalization, we test GR-CLIP across three CLIP variants, three additional datasets, and three other modalities (detailed in the Appendix). In all cases, the findings and improvements hold consistently.} 
+          </p>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <!--/ A -->
+
+    <!-- A -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">🛠️ Retrieval with Multimodal Documents</h2>
+        <!-- <div class="content has-text-justified">
+          <p>xxx.</p>
+        </div><br> -->
+        <p>We now consider another ablation to mixed modality search: the retrieval corpus is homogeneous, but each document is multimodal—containing both image and text modalities (a). This setup evaluates the model’s ability to fuse multimodal information, where image and text together should provide richer semantic cues than either modality alone.</p>
+        <!-- <h3 class="title is-4">AutoConverter Framework and Results</h3> -->
+        <div class="content has-text-justified">
+          <center><img id="method" src="assets/figure_two-1.png" width="100%"/></center>
+          <p>
+            <strong>(a) Dataset Construction:</strong> Each document contains both image and text, and embeddings are obtained by fusing modality-specific features. We vary the fusion coefficient $\alpha$ to evaluate the model's ability to integrate multimodal information.
+            <strong>(b) Results:</strong> GR-CLIP consistently outperforms CLIP across three model variants and four datasets, demonstrating that the modality gap hinders effective multimodal fusion—and that removing it significantly enhances retrieval performance.
+          </p>
+        </div><br>
+
+        <h3 class="title is-4">MixBench: A new benchmark specifically designed for mixed modality search mirroring real-world search engine challenges</h3>
+        <div class="content has-text-justified">
+          <p>Unifyig the findings from the above two settings and extend our analysis to the most realistic scenario: mixed modality search, where documents in the corpus may be purely text, purely image, or a combination of both (a). This setting mirrors real-world search engine challenges, where retrieval systems must operate over heterogeneous and variably multimodal content.</p>
+          <center><img id="method" src="assets/figure_three_all.png" width="100%"/></center>
+          <p>
+            <strong>(a) Dataset Construction:</strong> We introduce MixBench, a benchmark where the corpus is heterogeneous and includes multimodal documents, reflecting the most realistic setting for search engines.  
+            <strong>(b) Results:</strong> Across four MixBench subsets and five CLIP variants, GR-CLIP delivers substantial improvements over the original CLIP models by eliminating the modality gap, achieving state-of-the-art performance with significantly lower computational cost.
+          </p>
+        </div>
+
+        <!-- <h3 class="title is-4">Qualitative Comparison of the Original Questions, Naive Baseline-Generated Questions, and AutoConverter-Generated Questions.</h3>
+        <div class="content has-text-justified">
+          <center><img id="method" src="assets/5.png" width="100%"/></center>
+            <p><em>AutoConverter</em> simulates errors from different perspectives and produces correct and challenging multiple-choice questions.</p>
+        </div><br> -->
+        
+        <!-- <h3 class="title is-4">Explore AutoConverter!</h3>
+        <div class="content has-text-justified">
+          <gradio-app src="https://huggingface.co/spaces/mixed-modality-search/Evaluation_for_MixBench"></gradio-app>
+        </div> -->
+        
+      </div>
+    </div>
+    <!--/ A -->
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <!-- <h2 class="title is-4">🗂️ MixBench: A new benchmark specifically designed for mixed modality search mirroring real-world search engine challenges.</h2>
+        <div class="content has-text-justified">
+          <p>xxx</p>
+        </div><br> -->
+        <h3 class="title is-4">Explore MixBench!</h3>
+        <div class="content has-text-justified">
+          <iframe
+            src="https://huggingface.co/datasets/mixed-modality-search/MixBench2025/embed/viewer/default/dev"
+            frameborder="0"
+            width="100%"
+            height="560px"
+          ></iframe>
+        </div>
+
+        <!-- <h3 class="title is-4">📈 Evaluation of MixBench</h3>
+        <div class="content has-text-justified">
+          <p>Here are the running commands:</p>
+          <div class="code-block">
+            <p>Do Retrie</code></p>
+          </div>
+        </div><br> -->
+        <h3 class="title is-4">Evaluate Model Outputs on MixBench!</h3>
+        <div class="content has-text-justified">
+          <gradio-app src="https://mixed-modality-search-evaluation-for-mixbench.hf.space"></gradio-app>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{GR-CLIP,
+  title={Closing the Modality Gap for Mixed Modality Search},
+  author={Binxu Li and Yuhui Zhang and Xiaohan Wang and Weixin Liang and Ludwig Schmidt and Serena Yeung-Levy},
+  booktitle={xxxx},
+  year={2025}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a 
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              Creative Commons Attribution-ShareAlike 4.0 International License
+            </a>. 
+            The website template is from the 
+            <a href="https://github.com/nerfies/nerfies.github.io">
+              Nerfies
+            </a> 
+            project page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
