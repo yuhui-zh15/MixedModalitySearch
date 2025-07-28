@@ -5,7 +5,7 @@
 [![Pytorch](https://img.shields.io/badge/Pytorch-2.5-red.svg)](https://pytorch.org/get-started/previous-versions/#v25)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-This repo provides the source code of our paper: Closing the Modality Gap for Mixed Modality Search.  
+This repo provides the source code of our paper: [Closing the Modality Gap for Mixed Modality Search](https://arxiv.org/abs/2507.19054).  
 
 ## 🔮 Abstract
 
@@ -90,10 +90,10 @@ Evaluate using the extracted embeddings with a 1:1:1 ratio of pure text, pure im
 
 If you use this repo in your research, please cite it as follows:
 ```
-@article{GR-CLIP,
+@article{MixedModalitySearch,
   title={Closing the Modality Gap for Mixed Modality Search},
-  author={Anonymous},
-  journal={xxx},
+  author={Binxu Li and Yuhui Zhang and Xiaohan Wang and Weixin Liang and Ludwig Schmidt and Serena Yeung-Levy},
+  journal={arXiv preprint arXiv:2507.19054},
   year={2025}
 }
 ```
